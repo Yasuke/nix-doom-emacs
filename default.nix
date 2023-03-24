@@ -93,8 +93,10 @@ let
        })
       { src = ./.; }).defaultNix;
   lock = p:
-    if dependencyOverrides ? ${p} then
-      dependencyOverrides.${p}
+    if builtins.hasAttr p dependencyOverrides then
+      let override = dependencyOverrides.${p};
+      in
+        { url = override.url; flake = override.flake; }
     else
       flake.inputs.${p};
   # Packages we need to get the default doom configuration run
