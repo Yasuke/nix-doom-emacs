@@ -111,6 +111,7 @@ let
     phases = [ "unpackPhase" "patchPhase" "installPhase" ];
     patches = [
       ./patches/fix-paths.patch
+      ./patches/fix-consult.patch
     ];
     installPhase = ''
       mkdir -p $out

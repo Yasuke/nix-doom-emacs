@@ -1,0 +1,43 @@
+From 59b8a162eef31d3b210452f53f373c5400ad1107 Mon Sep 17 00:00:00 2001
+From: Sky O <soraskymizu@gmail.com>
+Date: Wed, 29 Mar 2023 16:35:24 +0000
+Subject: [PATCH] Use updated consult config format
+
+---
+ modules/completion/vertico/autoload/vertico.el | 2 +-
+ modules/completion/vertico/config.el           | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/modules/completion/vertico/autoload/vertico.el b/modules/completion/vertico/autoload/vertico.el
+index b7c828bef..b9d039076 100644
+--- a/modules/completion/vertico/autoload/vertico.el
++++ b/modules/completion/vertico/autoload/vertico.el
+@@ -54,7 +54,7 @@
+                                    "%")
+                      :type perl)
+                    consult-async-split-style 'perlalt))))))
+-    (consult--grep prompt #'consult--ripgrep-builder directory query)))
++    (consult--grep prompt (consult--ripgrep-make-builder) directory query)))
+ 
+ ;;;###autoload
+ (defun +vertico/project-search (&optional arg initial-query directory)
+diff --git a/modules/completion/vertico/config.el b/modules/completion/vertico/config.el
+index 2ff4f9fdf..0346c69d8 100644
+--- a/modules/completion/vertico/config.el
++++ b/modules/completion/vertico/config.el
+@@ -148,10 +148,10 @@ orderless."
+    +default/search-notes-for-symbol-at-point
+    +default/search-emacsd
+    consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+-   :preview-key (kbd "C-SPC"))
++   :preview-key "C-SPC")
+   (consult-customize
+    consult-theme
+-   :preview-key (list (kbd "C-SPC") :debounce 0.5 'any))
++   :preview-key (list "C-SPC" :debounce 0.5 'any))
+   (when (modulep! :lang org)
+     (defvar +vertico--consult-org-source
+       (list :name     "Org Buffer"
+-- 
+2.39.2
+
